@@ -12,7 +12,8 @@
     "@types/telegram-web-app": "^7.8.0",
     "next": "14.2.6",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "telegraf": "^4.16.3"
   },
   "devDependencies": {
     "@types/node": "^20",
