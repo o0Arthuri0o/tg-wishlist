@@ -1,19 +1,22 @@
 "use client"
 import Image from "next/image";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
-  let id:any;
-  let userName:any;
-  let url:any;
-  let bg:any
+  const [id, setId] = useState<number | undefined>(undefined);
+  const [userName, setUserName] = useState<string | undefined>(undefined);
+  const [url, setUrl] = useState<string | undefined>(undefined);
+  const [bg, setBg] = useState<string | undefined>(undefined);
+
   useEffect(() => {
-    id = window?.Telegram?.WebApp.initDataUnsafe.user?.id
-    userName = window?.Telegram?.WebApp.initDataUnsafe.user?.username
-    url = window?.Telegram?.WebApp.initDataUnsafe.user?.photo_url
-    bg = window.Telegram.WebApp.backgroundColor
-  }, [])
- 
+    if (typeof window !== "undefined" && window.Telegram?.WebApp) {
+      const user = window.Telegram.WebApp.initDataUnsafe.user;
+      setId(user?.id);
+      setUserName(user?.username);
+      setUrl(user?.photo_url);
+      setBg(window.Telegram.WebApp.backgroundColor);
+    }
+  }, []);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex flex-col gap-6 items-center " >
