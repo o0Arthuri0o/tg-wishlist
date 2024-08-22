@@ -15,7 +15,7 @@ export default function Home() {
       setUserName(user?.username);
       setUrl(user?.photo_url);
       setBg(window.Telegram.WebApp.backgroundColor);
-      console.log(id)
+      console.log(user)
     }
   }
 
@@ -26,7 +26,8 @@ export default function Home() {
         <p>{bg} check</p>
         {url &&
           <Image src={url} alt='avatar' width={300} height={300} />
-        } 
+        }
+
         <p className="text-base " >id: {id}</p>
         <p className="text-base " >user name: {userName}</p>
         <button onClick={handleClick} >test</button>
