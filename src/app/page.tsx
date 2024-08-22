@@ -8,15 +8,16 @@ export default function Home() {
   const [url, setUrl] = useState<string | undefined>(undefined);
   const [bg, setBg] = useState<string | undefined>(undefined);
 
-  useEffect(() => {
+  const handleClick = () => {
     if (typeof window !== "undefined" && window.Telegram?.WebApp) {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
       setId(user?.id);
       setUserName(user?.username);
       setUrl(user?.photo_url);
       setBg(window.Telegram.WebApp.backgroundColor);
+      console.log(id)
     }
-  }, [window?.Telegram?.WebApp]);
+  }
 
   console.log(id, userName)
   return (
@@ -28,6 +29,7 @@ export default function Home() {
         } 
         <p className="text-base " >id: {id}</p>
         <p className="text-base " >user name: {userName}</p>
+        <button onClick={handleClick} >test</button>
       </div>
     </main>
   );
