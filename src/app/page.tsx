@@ -16,7 +16,9 @@ export default function Home() {
       setUrl(user?.photo_url);
       setBg(window.Telegram.WebApp.backgroundColor);
     }
-  }, []);
+  }, [window?.Telegram?.WebApp]);
+
+  console.log(id, userName)
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex flex-col gap-6 items-center " >
