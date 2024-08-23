@@ -9,7 +9,7 @@ export default function Home() {
   const [url, setUrl] = useState<string | undefined>(undefined);
   const [bg, setBg] = useState<string | undefined>(undefined);
   const [usersList, setUsersList] = useState([])
-  
+
   const handleClick = () => {
     if (typeof window !== "undefined" && window.Telegram?.WebApp) {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
@@ -26,6 +26,7 @@ export default function Home() {
       const usersArr = await getUsers()
       if(usersArr?.lenght > 0) setUsersList(usersArr)
     }
+    getUserArr()
 
   },[])
 
