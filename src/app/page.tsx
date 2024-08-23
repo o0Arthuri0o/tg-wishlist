@@ -8,7 +8,8 @@ export default function Home() {
   const [userName, setUserName] = useState<string | undefined>(undefined);
   const [url, setUrl] = useState<string | undefined>(undefined);
   const [bg, setBg] = useState<string | undefined>(undefined);
-
+  const [usersList, setUsersList] = useState([])
+  
   const handleClick = () => {
     if (typeof window !== "undefined" && window.Telegram?.WebApp) {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
@@ -21,7 +22,11 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getUsers()
+    const getUserArr = async() => {
+      const usersArr = await getUsers()
+      if(usersArr?.lenght > 0) setUsersList(usersArr)
+    }
+
   },[])
 
 
@@ -32,7 +37,7 @@ export default function Home() {
         {url &&
           <Image src={url} alt='avatar' width={300} height={300} />
         }
-
+        <p>users{usersList}</p>
         <p className="text-base " >id: {id}</p>
         <p className="text-base " >user name: {userName}</p>
         <button onClick={handleClick} >test</button>
