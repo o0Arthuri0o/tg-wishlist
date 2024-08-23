@@ -35,7 +35,7 @@ export default function Home() {
       <div className="flex flex-col gap-6 items-center " >
         <p>{bg} check</p>
         {usersList.map(user => 
-          <p>{user.firstName}</p>
+          <p key={user.firstName} >{user.firstName}</p>
         )
 
         }
