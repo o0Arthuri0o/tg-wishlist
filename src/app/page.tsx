@@ -1,4 +1,5 @@
 "use client"
+import { getUsers } from "@/shared";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
@@ -19,7 +20,11 @@ export default function Home() {
     }
   }
 
-  console.log(id, userName)
+  useEffect(() => {
+    getUsers()
+  },[])
+
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex flex-col gap-6 items-center " >
