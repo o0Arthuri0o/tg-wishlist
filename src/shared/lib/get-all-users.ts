@@ -5,6 +5,7 @@ import { db } from "../api";
 
 
 export async function getUsers() {
+    console.log(process.env.API_KEY)
     const users :any= []
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
