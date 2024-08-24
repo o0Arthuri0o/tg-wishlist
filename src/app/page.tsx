@@ -1,11 +1,12 @@
 "use client"
+import { Button } from "@/shared/ui/button";
 import { getUsers, initializeUser } from "@/shared";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function Home() {
-  // const [id, setId] = useState<number | undefined>(undefined);
-  // const [userName, setUserName] = useState<string | undefined>(undefined);
+  const [id, setId] = useState<number | undefined>(undefined);
+  const [userName, setUserName] = useState<string | undefined>(undefined);
   // const [url, setUrl] = useState<string | undefined>(undefined);
   // const [bg, setBg] = useState<string | undefined>(undefined);
   // const [usersList, setUsersList] = useState<{firstName:string}[]>([])
@@ -23,16 +24,24 @@ export default function Home() {
 
   useEffect(() => {
     const user = window.Telegram.WebApp.initDataUnsafe.user
+    setId(user?.id)
+    setUserName(user?.username)
     console.log(user)
-    // initializeUser()
     console.log('first load')
-
+    initializeUser(`${user?.id}`, user?.username)
   },[])
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="p-6 flex flex-col gap-6 items-center ">
+
       <div className="flex flex-col gap-6 items-center " >
-       test
+        <p> <span className="font-bold " >{userName}</span>, создавай списки желаний и делись ими с друзьями!</p>
+      </div>
+
+      <Button>Создать новый список</Button>
+
+      <div>
+        
       </div>
     </main>
   );
