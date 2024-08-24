@@ -1,11 +1,10 @@
 "use server"
 
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../api";
 
 
 export async function getUsers() {
-    console.log(process.env.API_KEY)
     const users:{firstName:string}[]= []
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
@@ -16,4 +15,18 @@ export async function getUsers() {
     });
     return users
     
+}
+
+export async function initializeUser(id:string, userName?:string) {
+  const docRef = doc(db, "users", id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+  } else {
+    const docSnap = await setDoc(doc(db, "users", id), {
+      userName: userName ? userName : ''
+    });
+    console.log("Create bew user", id, userName);
+  }
 }
