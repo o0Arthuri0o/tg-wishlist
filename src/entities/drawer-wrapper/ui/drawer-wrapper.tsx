@@ -14,7 +14,7 @@ import { ReactNode } from "react"
 
 
 export const DrawerWrapper = ({children, form}:{children:ReactNode, form:ReactNode}) => {
-
+    
     return(
         <Drawer>
             <DrawerTrigger>
@@ -22,15 +22,10 @@ export const DrawerWrapper = ({children, form}:{children:ReactNode, form:ReactNo
             </DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader>
-                <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                <DrawerTitle>Озадач друзей своим списком!</DrawerTitle>
+                <DrawerDescription>Задайте параметры для вашего вишлиста</DrawerDescription>
                 </DrawerHeader>
-                <DrawerFooter>
-                <Button>Submit</Button>
-                <DrawerClose>
-                    <Button variant="outline">Cancel</Button>
-                </DrawerClose>
-                </DrawerFooter>
+                {form}
             </DrawerContent>
         </Drawer>
 

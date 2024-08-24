@@ -2,6 +2,7 @@ import { Inter } from "next/font/google"
 import "./globals.css";
 import Script from "next/script";
 import { Metadata } from "next";
+import { Toaster } from "@/shared/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         {children}
+        <Toaster/>
         <Script 
           src="https://telegram.org/js/telegram-web-app.js" 
           strategy="beforeInteractive"
