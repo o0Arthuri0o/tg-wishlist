@@ -1,8 +1,7 @@
 "use client"
-import { Button } from "@/shared/ui/button";
-import { getUsers, initializeUser } from "@/shared";
-import Image from "next/image";
+import { initializeUser, Button } from "@/shared";
 import { useState, useEffect } from "react";
+import { DrawerWrapper } from "@/entities";
 
 export default function Home() {
   const [id, setId] = useState<number | undefined>(undefined);
@@ -25,10 +24,10 @@ export default function Home() {
   useEffect(() => {
     const user = window.Telegram.WebApp.initDataUnsafe.user
     setId(user?.id)
-    setUserName(user?.username)
+    setUserName(user?.first_name)
     console.log(user)
     console.log('first load')
-    initializeUser(`${user?.id}`, user?.username)
+    initializeUser(`${user?.id}`, user?.first_name)
   },[])
 
   return (
@@ -38,10 +37,12 @@ export default function Home() {
         <p> <span className="font-bold " >{userName}</span>, создавай списки желаний и делись ими с друзьями!</p>
       </div>
 
-      <Button>Создать новый список</Button>
+      <DrawerWrapper form={<p>test</p>} >
+        <Button>Создать новый список</Button>
+      </DrawerWrapper>
 
       <div>
-        
+
       </div>
     </main>
   );
