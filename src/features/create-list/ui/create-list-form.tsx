@@ -20,18 +20,19 @@ export function CreateListForm() {
     const onSumit = (data:z.infer<typeof CreateListFormSchema>) => {
         const id = window.Telegram.WebApp.initDataUnsafe.user?.id
         if(id) {
-                createNewList(`${id}`, data.title).then(() => {
-                    toast({
-                        variant: "default",
-                        title: "Ура! Список создался",
-                    })
-                }).catch(() => {
-                    toast({
-                        variant: "destructive",
-                        title: "Ой, список не создался",
-                        description: "Попробуйте заново",
-                    })
+            console.log(id, data.title)
+            createNewList(`${id}`, data.title).then(() => {
+                toast({
+                    variant: "default",
+                    title: "Ура! Список создался",
                 })
+            }).catch(() => {
+                toast({
+                    variant: "destructive",
+                    title: "Ой, список не создался",
+                    description: "Попробуйте заново",
+                })
+            })
         }
         
     }
