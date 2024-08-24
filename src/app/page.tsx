@@ -27,7 +27,7 @@ export default function Home() {
     setUserName(user?.first_name)
     console.log(user)
     console.log('first load')
-    initializeUser(`${user?.id}`, user?.first_name)
+    if(user?.id) initializeUser(`${user?.id}`, user?.first_name)
   },[])
 
   return (
