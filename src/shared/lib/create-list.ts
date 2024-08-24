@@ -1,4 +1,6 @@
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+"use server"
+
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "../api";
 
 
