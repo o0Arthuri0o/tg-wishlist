@@ -1,3 +1,4 @@
+'use client'
 import {
     Button,
     Drawer,
@@ -9,14 +10,16 @@ import {
     DrawerTitle,
     DrawerTrigger,
   } from "@/shared"
-import { ReactNode } from "react"
+import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react"
   
-
+export const DrawerIsOpenContext = createContext<Dispatch<SetStateAction<boolean>> | null>(null)
 
 export const DrawerWrapper = ({children, form}:{children:ReactNode, form:ReactNode}) => {
+    const [isOpen, setIsOpen] = useState(false)
+    
     
     return(
-        <Drawer>
+        <Drawer open={isOpen} onOpenChange={e => setIsOpen(e)} >
             <DrawerTrigger>
                 {children}
             </DrawerTrigger>
@@ -25,7 +28,10 @@ export const DrawerWrapper = ({children, form}:{children:ReactNode, form:ReactNo
                 <DrawerTitle>Озадач друзей своим списком!</DrawerTitle>
                 <DrawerDescription>Задайте параметры для вашего вишлиста</DrawerDescription>
                 </DrawerHeader>
-                {form}
+                <DrawerIsOpenContext.Provider value={setIsOpen} >
+                    {form}
+                </DrawerIsOpenContext.Provider>
+                
             </DrawerContent>
         </Drawer>
 

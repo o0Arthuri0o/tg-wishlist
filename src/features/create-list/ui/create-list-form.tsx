@@ -6,8 +6,13 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { CreateListFormSchema } from "../model/create-list-form.model"
 import { useToast } from "@/shared"
+import { useContext } from "react"
+import { DrawerIsOpenContext } from "@/entities"
+import { useRouter } from "next/navigation"
 
 export function CreateListForm() {
+    const router = useRouter()
+    const setIsOpenDrawer = useContext(DrawerIsOpenContext)
     const { toast } = useToast()
 
     const form = useForm<z.infer<typeof CreateListFormSchema>>({
@@ -20,12 +25,14 @@ export function CreateListForm() {
     const onSumit = (data:z.infer<typeof CreateListFormSchema>) => {
         const id = window.Telegram.WebApp.initDataUnsafe.user?.id
         if(id) {
-            console.log(id, data.title)
-            createNewList(`${id}`, data.title).then(() => {
+            createNewList(`${id}`, data.title).then((id) => {
                 toast({
                     variant: "default",
                     title: "Ура! Список создался",
                 })
+                setIsOpenDrawer?.(false)
+                router.push(`/[${id}]`)
+
             }).catch(() => {
                 toast({
                     variant: "destructive",

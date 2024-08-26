@@ -30,6 +30,7 @@ export default function Home() {
         <p> <span className="font-bold " >{userName}</span>, создавай списки желаний и делись ими с друзьями!</p>
       </div>
 
+
       <DrawerWrapper form={<CreateListForm/>} >
         <Button>Создать новый список</Button>
       </DrawerWrapper>
