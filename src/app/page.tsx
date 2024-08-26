@@ -5,11 +5,21 @@ import { DrawerWrapper } from "@/entities";
 import { CreateListForm } from "@/features";
 import { getLists } from "@/shared/lib/get-lists";
 
+interface List {
+  id: string
+  title: string
+}
+
 export default function Home() {
   const [id, setId] = useState<number | undefined>(undefined);
   const [userName, setUserName] = useState<string | undefined>(undefined);
+  const [lists, setLists] = useState<List[]>([])
 
   useEffect(() => {
+    const getAllLists = async(id:string) => {
+      const listsArr = await getLists(`${id}`)
+      setLists(listsArr)
+    }
     const user = window.Telegram.WebApp.initDataUnsafe.user
     
     setId(user?.id)
@@ -17,7 +27,7 @@ export default function Home() {
 
     if(user?.id) {
       initializeUser(`${user?.id}`, user?.first_name)
-      getLists(`${user.id}`)
+      getAllLists(`${user.id}`)
     }
   },[])
 
@@ -35,9 +45,11 @@ export default function Home() {
         <Button>Создать новый список</Button>
       </DrawerWrapper>
 
-      <div>
-
-      </div>
+      <ul>
+        {lists.map(list => 
+          <li key={list.id} >{list.title}</li>
+        )}
+      </ul>
     </main>
   );
 }

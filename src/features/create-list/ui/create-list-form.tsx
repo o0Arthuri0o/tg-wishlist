@@ -6,15 +6,16 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { CreateListFormSchema } from "../model/create-list-form.model"
 import { useToast } from "@/shared"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { DrawerIsOpenContext } from "@/entities"
 import { useRouter } from "next/navigation"
+import { Loader2 } from "lucide-react"
 
 export function CreateListForm() {
     const router = useRouter()
     const setIsOpenDrawer = useContext(DrawerIsOpenContext)
     const { toast } = useToast()
-
+    const [isLoading, setIsLoading] = useState(false)
     const form = useForm<z.infer<typeof CreateListFormSchema>>({
         resolver: zodResolver(CreateListFormSchema),
         defaultValues:{
@@ -24,7 +25,9 @@ export function CreateListForm() {
 
     const onSumit = (data:z.infer<typeof CreateListFormSchema>) => {
         const id = window.Telegram.WebApp.initDataUnsafe.user?.id
+        setIsLoading(true)
         if(id) {
+            setIsLoading(true)
             createNewList(`${id}`, data.title).then((id) => {
                 toast({
                     variant: "default",
@@ -32,6 +35,7 @@ export function CreateListForm() {
                 })
                 setIsOpenDrawer?.(false)
                 router.push(`/[${id}]`)
+                setIsLoading(false)
 
             }).catch(() => {
                 toast({
@@ -39,6 +43,7 @@ export function CreateListForm() {
                     title: "Ой, список не создался",
                     description: "Попробуйте заново",
                 })
+                setIsLoading(false)
             })
         }
         
@@ -64,7 +69,16 @@ export function CreateListForm() {
                 )}
                 />
                  <DrawerFooter className="px-0 " >
-                    <Button>Создать</Button>
+                    <Button>
+                        {isLoading ?
+                            <>
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                Загрузка
+                            </>
+                            :
+                            'Создать'
+                        }
+                    </Button>
                     <DrawerClose>
                         <Button variant="outline" className="w-full">Назад</Button>
                     </DrawerClose>

@@ -1,10 +1,18 @@
 "use server"
-import { doc, onSnapshot } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../api";
 
-export const getLists = (id:string) => {
-    const unsub = onSnapshot(doc(db, 'users', 'id', 'lists'), (doc) => {
-        console.log("Current data: ", doc.data());
-        return doc.data()
+interface List {
+    id: string
+    title: string
+}
+
+export const getLists = async(id:string) => {
+    const listsArray:List[] = []
+    const querySnapshot = await getDocs(collection(db, "users", id, "lists"));
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        listsArray.push({id: doc.id, title: doc.data().title});
     });
+    return listsArray
 }

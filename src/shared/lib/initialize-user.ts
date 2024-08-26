@@ -8,11 +8,11 @@ export async function initializeUser(id:string, userName?:string, ) {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
+    //console.log("Document data:", docSnap.data());
   } else {
     await setDoc(doc(db, "users", id), {
       firstName: userName ? userName : '',
     });
-    console.log("Create new user", id, userName);
+    //console.log("Create new user", id, userName);
   }
 }
