@@ -1,9 +1,10 @@
 "use client"
 import { initializeUser, Button } from "@/shared";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, use, Suspense } from "react";
 import { DrawerWrapper } from "@/entities";
 import { CreateListForm } from "@/features";
 import { getLists } from "@/shared/lib/get-lists";
+import { ListCard, ListCardSkeleton } from "@/entities/list-card";
 
 interface List {
   id: string
@@ -45,11 +46,14 @@ export default function Home() {
         <Button>Создать новый список</Button>
       </DrawerWrapper>
 
-      <ul>
+      <div>
         {lists.map(list => 
-          <li key={list.id} >{list.title}</li>
+          // <li key={list.id} >{list.title}</li>
+          <Suspense fallback={<ListCardSkeleton/>} key={list.id} >
+            <ListCard id={list.id} title={list.title}/>
+          </Suspense>
         )}
-      </ul>
+      </div>
     </main>
   );
 }
