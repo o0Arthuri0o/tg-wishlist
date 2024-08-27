@@ -17,12 +17,18 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
     const [isLoading, setIsLoading] = useState(false)
     const form = useForm<z.infer<typeof CreateGiftFormSchema>>({
         resolver:zodResolver(CreateGiftFormSchema),
+        defaultValues:{
+            name:'',
+            description:'',
+            link:'',
+            photo:[],
+            price:''
+        }
     })
 
     const onSumit = (data:z.infer<typeof CreateGiftFormSchema>) => {
-       
         console.log(data)
-        setIsLoading(true)
+        // setIsLoading(true)
     }
 
     return(

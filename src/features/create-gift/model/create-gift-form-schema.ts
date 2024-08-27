@@ -11,13 +11,5 @@ export const CreateGiftFormSchema = z.object({
         "Введите стоимость"
     }),
     link: z.string().optional(),
-    photo: z
-    .instanceof(File)
-    .refine((file) => {
-      return !file || file.size <= MAX_UPLOAD_SIZE;
-    }, 'Слишком большой файл')
-    .refine((file) => {
-      return ACCEPTED_FILE_TYPES.includes(file.type);
-    }, 'Файл должен быть картинкой')
-    .optional()
+    photo: z.array(z.any())
 })

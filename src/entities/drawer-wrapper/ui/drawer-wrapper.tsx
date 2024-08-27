@@ -23,7 +23,7 @@ export const DrawerWrapper = ({children, form, type}:{children:ReactNode, form:R
             <DrawerTrigger>
                 {children}
             </DrawerTrigger>
-            <DrawerContent>
+            <DrawerContent className="max-h-[80%]" >
             <div className="overflow-y-auto " >
                 <DrawerHeader>
                 <DrawerTitle>{type === 'list' ? 'Озадач друзей своим списком!' : 'Добававь подарок'}</DrawerTitle>
