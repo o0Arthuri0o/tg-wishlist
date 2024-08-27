@@ -46,12 +46,9 @@ export default function Home() {
         <Button>Создать новый список</Button>
       </DrawerWrapper>
 
-      <div>
+      <div className="grid grid-cols-2 gap-6 " >
         {lists.map(list => 
-          // <li key={list.id} >{list.title}</li>
-          <Suspense fallback={<ListCardSkeleton/>} key={list.id} >
-            <ListCard id={list.id} title={list.title}/>
-          </Suspense>
+            <ListCard id={list.id} title={list.title} key={list.id} />
         )}
       </div>
     </main>
