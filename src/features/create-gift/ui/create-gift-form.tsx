@@ -1,6 +1,6 @@
 "use client"
  
-import { Button, createNewList, DrawerClose, DrawerFooter, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input, Textarea } from "@/shared"
+import { Button, createNewGift, createNewList, DrawerClose, DrawerFooter, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input, Textarea } from "@/shared"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -9,9 +9,10 @@ import { useToast } from "@/shared"
 import { useContext, useState } from "react"
 import { DrawerIsOpenContext } from "@/entities"
 import { Loader2 } from "lucide-react"
+import { useParams } from "next/navigation"
 
 export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema>}) {
-
+    const params = useParams()
     const setIsOpenDrawer = useContext(DrawerIsOpenContext)
     const { toast } = useToast()
     const [isLoading, setIsLoading] = useState(false)
@@ -27,8 +28,13 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
     })
     const fileRef = form.register("photo")
     const onSumit = (data:z.infer<typeof CreateGiftFormSchema>) => {
-        console.log(data)
-        // setIsLoading(true)
+        console.log(data, params?.id[0], params?.id)
+        setIsLoading(true)
+        createNewGift(data, params?.id[0]).then(() => {
+          if(setIsOpenDrawer) setIsOpenDrawer(false)
+            
+        })
+
     }
 
     return(
