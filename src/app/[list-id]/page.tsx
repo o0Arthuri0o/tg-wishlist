@@ -8,7 +8,7 @@ export default async function ListPage({params}:{params: {'list-id': string}}) {
   return (
     <div className="p-6 " >
       <Link href={'/'} >back</Link>
-      <p className="text-base " >{list?.title}</p>
+      <p className="text-base " >{id} - {list?.title}</p>
       <div className="mt-6  " >
         список подарков
       </div>
