@@ -6,7 +6,7 @@ import { ListCardSkeleton } from "./list-card-skeleton"
 export function ListCard({title, id}:{title:string, id:string}) {
 
   return (
-    <Suspense fallback={<ListCardSkeleton/>} >
+    <Suspense fallback={<p>Загрузка...</p>} >
       <Link href={`/${id}`} >
           <Card>
               <CardContent>
