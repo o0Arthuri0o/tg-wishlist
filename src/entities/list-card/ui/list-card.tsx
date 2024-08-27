@@ -1,3 +1,5 @@
+"use client"
+
 import { CardTitle, Card, CardContent} from "@/shared"
 import Link from "next/link"
 import { Suspense } from "react"
