@@ -104,12 +104,12 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
             />
             <FormField
                 control={form.control}
-                name="link"
+                name="photo"
                 render={({ field }) => (
                     <FormItem>
                         <FormLabel>Фото</FormLabel>
                         <FormControl>
-                            <Input type="file" {...field} />
+                            <Input type="file" accept="image/png, image/jpeg" {...field} />
                         </FormControl>
                         <FormDescription>
                             Можете по желанию загрузить фото подарка
