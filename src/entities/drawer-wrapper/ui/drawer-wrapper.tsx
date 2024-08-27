@@ -14,7 +14,7 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "re
   
 export const DrawerIsOpenContext = createContext<Dispatch<SetStateAction<boolean>> | null>(null)
 
-export const DrawerWrapper = ({children, form}:{children:ReactNode, form:ReactNode}) => {
+export const DrawerWrapper = ({children, form, type}:{children:ReactNode, form:ReactNode, type:'list'|'gift'}) => {
     const [isOpen, setIsOpen] = useState(false)
     
     
@@ -24,13 +24,15 @@ export const DrawerWrapper = ({children, form}:{children:ReactNode, form:ReactNo
                 {children}
             </DrawerTrigger>
             <DrawerContent>
+            <div className="overflow-y-auto " >
                 <DrawerHeader>
-                <DrawerTitle>Озадач друзей своим списком!</DrawerTitle>
-                <DrawerDescription>Задайте параметры для вашего вишлиста</DrawerDescription>
+                <DrawerTitle>{type === 'list' ? 'Озадач друзей своим списком!' : 'Добававь подарок'}</DrawerTitle>
+                <DrawerDescription>{type === 'list' ? 'Задайте название для вашего вишлиста' : 'Заполните карточку подарка'}</DrawerDescription>
                 </DrawerHeader>
                 <DrawerIsOpenContext.Provider value={setIsOpen} >
                     {form}
                 </DrawerIsOpenContext.Provider>
+            </div>
                 
             </DrawerContent>
         </Drawer>

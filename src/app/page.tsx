@@ -43,7 +43,7 @@ export default function Home() {
       </div>
 
 
-      <DrawerWrapper form={<CreateListForm/>} >
+      <DrawerWrapper type="list" form={<CreateListForm/>} >
         <Button>Создать новый список</Button>
       </DrawerWrapper>
 

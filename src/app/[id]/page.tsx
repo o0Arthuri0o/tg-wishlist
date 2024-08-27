@@ -19,7 +19,7 @@ export default async function ListPage({params}:{params: {id: string}}) {
 
       <div className="flex flex-col gap-3 " >
         <Button>Поделиться списком</Button>
-        <DrawerWrapper form={<CreateGiftForm/>} >
+        <DrawerWrapper type="gift" form={<CreateGiftForm/>} >
           <Button>Добавить подарок</Button>
         </DrawerWrapper>
       </div>
