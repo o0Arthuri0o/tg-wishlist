@@ -5,6 +5,7 @@ import { DrawerWrapper } from "@/entities";
 import { CreateListForm } from "@/features";
 import { getLists } from "@/shared/lib/get-lists";
 import { ListCardWrapper, ListCardSkeleton } from "@/entities/list-card";
+import { Loader2 } from "lucide-react";
 
 interface List {
   id: string
@@ -46,11 +47,16 @@ export default function Home() {
         <Button>Создать новый список</Button>
       </DrawerWrapper>
 
-      <div className="grid grid-cols-2 gap-6 " >
-        {lists.map(list => 
-            <ListCardWrapper id={list.id} title={list.title} key={list.id} />
-        )}
-      </div>
+     
+        {lists.length > 0 ?
+          <div className="grid grid-cols-2 gap-6 " >
+            {lists.map(list => 
+              <ListCardWrapper id={list.id} title={list.title} key={list.id} />
+            )}
+          </div>
+          :
+          <Loader2 className="mr-2 h-6 w-6 m-auto animate-spin" />
+        }
     </main>
   );
 }
