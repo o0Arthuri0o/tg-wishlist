@@ -35,7 +35,7 @@ export function CreateListForm() {
                     title: "Ура! Список создался",
                 })
                 setIsOpenDrawer?.(false)
-                router.push(`/[${id}]`)
+                router.push(`/${id}`)
                 setIsLoading(false)
 
             }).catch(() => {
