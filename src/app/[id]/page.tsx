@@ -1,3 +1,5 @@
+import { DrawerWrapper } from "@/entities";
+import { CreateGiftForm } from "@/features/create-gift";
 import { Button, getList } from "@/shared";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -17,7 +19,9 @@ export default async function ListPage({params}:{params: {id: string}}) {
 
       <div className="flex flex-col gap-3 " >
         <Button>Поделиться списком</Button>
-        <Button>Добавить подарок</Button>
+        <DrawerWrapper form={<CreateGiftForm/>} >
+          <Button>Добавить подарок</Button>
+        </DrawerWrapper>
       </div>
       
       <div className="mt-6  " >

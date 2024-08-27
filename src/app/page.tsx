@@ -55,7 +55,7 @@ export default function Home() {
             )}
           </div>
           :
-          <Loader2 className="mr-2 h-6 w-6 m-auto animate-spin" />
+          <Loader2 className="mt-6 h-9 w-9 self-center animate-spin" />
         }
     </main>
   );
