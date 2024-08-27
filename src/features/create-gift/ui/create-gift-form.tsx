@@ -16,6 +16,7 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
     const { toast } = useToast()
     const [isLoading, setIsLoading] = useState(false)
     const form = useForm<z.infer<typeof CreateGiftFormSchema>>({
+        resolver:zodResolver(CreateGiftFormSchema),
     })
 
     const onSumit = (data:z.infer<typeof CreateGiftFormSchema>) => {
@@ -26,7 +27,7 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
 
     return(
         <Form {...form} >
-            <form onSubmit={form.handleSubmit(onSumit)} className="px-[16px] " >
+            <form onSubmit={form.handleSubmit(onSumit)} className="px-[16px] overflow-y-auto flex flex-col gap-3" >
             <FormField
                 control={form.control}
                 name="name"
