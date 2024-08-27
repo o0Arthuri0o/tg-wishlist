@@ -21,11 +21,11 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
             name:'',
             description:'',
             link:'',
-            photo:[],
+            photo: undefined,
             price:''
         }
     })
-
+    const fileRef = form.register("photo")
     const onSumit = (data:z.infer<typeof CreateGiftFormSchema>) => {
         console.log(data)
         // setIsLoading(true)
@@ -43,9 +43,9 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
                         <FormControl>
                             <Input placeholder="Крутой кофе" {...field} />
                         </FormControl>
-                        <FormDescription>
+                        {/* <FormDescription>
                             Можете указать навание вашего подарка
-                        </FormDescription>
+                        </FormDescription> */}
                         <FormMessage />
                     </FormItem>
                 )}
@@ -63,9 +63,9 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
                         {...field}
                         />
                     </FormControl>
-                    <FormDescription>
+                    {/* <FormDescription>
                         Отметьте важные подробности подарка
-                    </FormDescription>
+                    </FormDescription> */}
                     <FormMessage />
                     </FormItem>
                 )}
@@ -79,9 +79,9 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
                         <FormControl>
                             <Input type="number" className="remove-number" placeholder="777" {...field} />
                         </FormControl>
-                        <FormDescription>
+                        {/* <FormDescription>
                             Уточните примерную стоимоть подарка в рублях
-                        </FormDescription>
+                        </FormDescription> */}
                         <FormMessage />
                     </FormItem>
                 )}
@@ -109,7 +109,7 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
                     <FormItem>
                         <FormLabel>Фото</FormLabel>
                         <FormControl>
-                            <Input type="file" accept="image/png, image/jpeg" {...field} />
+                            <Input type="file" accept="image/png, image/jpeg" {...fileRef} />
                         </FormControl>
                         <FormDescription>
                             Можете по желанию загрузить фото подарка
