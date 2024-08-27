@@ -4,7 +4,7 @@ import { useState, useEffect, use, Suspense } from "react";
 import { DrawerWrapper } from "@/entities";
 import { CreateListForm } from "@/features";
 import { getLists } from "@/shared/lib/get-lists";
-import { ListCard, ListCardSkeleton } from "@/entities/list-card";
+import { ListCardWrapper, ListCardSkeleton } from "@/entities/list-card";
 
 interface List {
   id: string
@@ -48,7 +48,7 @@ export default function Home() {
 
       <div className="grid grid-cols-2 gap-6 " >
         {lists.map(list => 
-            <ListCard id={list.id} title={list.title} key={list.id} />
+            <ListCardWrapper id={list.id} title={list.title} key={list.id} />
         )}
       </div>
     </main>
