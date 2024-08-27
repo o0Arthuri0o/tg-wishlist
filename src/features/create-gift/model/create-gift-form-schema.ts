@@ -12,6 +12,6 @@ export const CreateGiftFormSchema = z.object({
     }),
     link: z.string().optional(),
     photo: z
-    .instanceof(File)
+    .instanceof(FileList)
     .optional()
 })
