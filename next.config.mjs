@@ -5,9 +5,9 @@ const nextConfig = {
         
                 {
                     protocol: 'https',
-                    hostname: 'tg-wishlist.vercel.app',
+                    hostname: 'firebasestorage.googleapis.com',
                     port: '',
-                    pathname: '/_next/**',
+                    pathname: '/v0/**',
                 },
         ]
 
