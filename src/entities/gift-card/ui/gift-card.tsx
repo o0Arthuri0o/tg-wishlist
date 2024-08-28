@@ -16,13 +16,9 @@ export function GiftCard({gift, listId}:{gift:Gift, listId:string}) {
     const [url, setUrl] = useState('')
 
     useEffect(() => {
-        const getUrl = async() => {
-            const urlArr = await getPhotoUrlsInFolder(gift.id)
-            console.log(urlArr[0])
-            if(urlArr[0]) setUrl(urlArr[0])
-        }
-
-        getUrl()
+        getPhotoUrlsInFolder(gift.id).then((urls) => {
+            if(urls[0]) setUrl(urls[0])
+        })
     }, [])
     
     const handleDelete = () => {
