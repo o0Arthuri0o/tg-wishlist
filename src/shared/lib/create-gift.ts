@@ -24,7 +24,7 @@ export const createNewGift = async(gift:Gift, id:string) => {
     //console.log('add new list', docRef.id)
     if(gift?.photo?.[0]) {
         const storage = getStorage();
-        const storageRef = ref(storage, `${id}/${gift.photo[0].name}`);
+        const storageRef = ref(storage, `files/${id}/${gift.photo[0].name}`);
     
         uploadBytes(storageRef, gift.photo[0]).then((snapshot) => {
             console.log('Uploaded a blob or file!');
