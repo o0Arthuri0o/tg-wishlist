@@ -4,6 +4,7 @@ import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { db } from "../api";
 import { revalidatePath } from "next/cache";
+import { uploadPhoto } from "./upload-photo";
 
 interface Gift {
     name:string, 
@@ -23,12 +24,11 @@ export const createNewGift = async(gift:Gift, id:string) => {
     });
     //console.log('add new list', docRef.id)
     if(gift?.photo?.[0]) {
-        const storage = getStorage();
-        const storageRef = ref(storage, `files/${id}/${gift.photo[0].name}`);
-    
-        uploadBytes(storageRef, gift.photo[0]).then((snapshot) => {
-            console.log('Uploaded a blob or file!');
-        });
+        try {
+            uploadPhoto(id, gift.photo[0])
+        } catch(err) {
+            console.log(err)
+        }
     }
     revalidatePath('/[id]', 'page')
    
