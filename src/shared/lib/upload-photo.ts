@@ -2,13 +2,13 @@
 
 import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "../api";
-export const uploadPhoto = (idGift:string, gift:FormData ) => {
+export const uploadPhoto = async(idGift:string, gift:FormData ) => {
     const giftObj = Object.fromEntries(gift)
     const file = giftObj.photo as File 
     console.log(file, file.name, 'file check', 'idGift', idGift)
-    const storageRef = ref(storage, `${idGift}/${file.name}`);
+    const imageRef = ref(storage, `${idGift}/${file.name}`);
 
-    uploadBytes(storageRef, file).then((snapshot) => {
+    uploadBytes(imageRef, file).then((snapshot) => {
         console.log('Uploaded a blob or file!', snapshot);
     }).catch((err) => console.log('error upload', err))
 }
