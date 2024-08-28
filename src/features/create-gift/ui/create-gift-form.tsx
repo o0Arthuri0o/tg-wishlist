@@ -10,8 +10,9 @@ import { useContext, useState } from "react"
 import { DrawerIsOpenContext } from "@/entities"
 import { Loader2 } from "lucide-react"
 import { useParams } from "next/navigation"
+import { Gift } from "@/shared/lib/get-gifts"
 
-export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema>}) {
+export function CreateGiftForm({gift}:{gift?:Gift}) {
     const params = useParams()
     const setIsOpenDrawer = useContext(DrawerIsOpenContext)
     const { toast } = useToast()
@@ -19,11 +20,11 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
     const form = useForm<z.infer<typeof CreateGiftFormSchema>>({
         resolver:zodResolver(CreateGiftFormSchema),
         defaultValues:{
-            name:'',
-            description:'',
-            link:'',
+            name: gift?.name ? gift?.name : '',
+            description: gift?.description ? gift?.description : '',
+            link: gift?.link ? gift?.link : '',
             photo: undefined,
-            price:''
+            price: gift?.price ? gift?.price : ''
         }
     })
     const fileRef = form.register("photo")
