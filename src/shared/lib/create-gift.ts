@@ -14,13 +14,14 @@ interface Gift {
     photo?:File
 }
 
-export const createNewGift = async(gift:Gift, id:string) => {
+export const createNewGift = async(gift:FormData, id:string) => {
 
+    const giftObj = Object.fromEntries(gift) 
     const docRef = await addDoc(collection(db, `lists/${id}/gifts`), {
-        name: gift.name, 
-        description: gift.description,
-        link: gift.link ? gift.link : '',
-        price: gift.price
+        name: giftObj.name, 
+        description: giftObj.description,
+        link: giftObj.link,
+        price: giftObj.price
     });
     revalidatePath('/[id]', 'page')
    
