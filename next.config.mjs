@@ -7,7 +7,7 @@ const nextConfig = {
                     protocol: 'https',
                     hostname: 'tg-wishlist.vercel.app',
                     port: '',
-                    pathname: '/next/**',
+                    pathname: '/_next/**',
                 },
         ]
 
