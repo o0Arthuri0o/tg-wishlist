@@ -11,7 +11,7 @@ interface Gift {
     description: string
     link?:string
     price:string
-    photo?:FileList
+    photo?:File
 }
 
 export const createNewGift = async(gift:Gift, id:string) => {
@@ -22,7 +22,7 @@ export const createNewGift = async(gift:Gift, id:string) => {
         link: gift.link ? gift.link : '',
         price: gift.price
     });
-    console.log(gift?.photo?.[0].name)
+    console.log(gift?.photo?.name)
     //console.log('add new list', docRef.id)
     // if(gift?.photo?.[0]) {
     //     console.log(gift.photo[0].name)

@@ -30,7 +30,7 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
     const onSumit = (data:z.infer<typeof CreateGiftFormSchema>) => {
         console.log(data, params?.id)
         setIsLoading(true)
-        createNewGift(data, params?.id as string).then(() => {
+        createNewGift({...data, photo:data?.photo?.[0]}, params?.id as string).then(() => {
           if(setIsOpenDrawer) setIsOpenDrawer(false)
 
         })
