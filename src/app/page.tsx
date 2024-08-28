@@ -15,12 +15,13 @@ interface List {
 export default function Home() {
   const [id, setId] = useState<number | undefined>(undefined);
   const [userName, setUserName] = useState<string | undefined>(undefined);
-  const [lists, setLists] = useState<List[]>([])
+  const [lists, setLists] = useState<List[]|undefined>([])
 
   useEffect(() => {
     const getAllLists = async(id:string) => {
       const listsArr = await getLists(`${id}`)
-      setLists(listsArr)
+      if(listsArr.length > 0) setLists(listsArr)
+      else setLists(undefined)
     }
     const user = window.Telegram.WebApp.initDataUnsafe.user
     
@@ -48,7 +49,7 @@ export default function Home() {
       </DrawerWrapper>
 
      
-        {lists.length > 0 ?
+        {lists && lists.length > 0 ?
           <div className="grid grid-cols-2 gap-6 " >
             {lists.map(list => 
               <ListCardWrapper id={list.id} title={list.title} key={list.id} />
@@ -56,6 +57,9 @@ export default function Home() {
           </div>
           :
           <Loader2 className="mt-6 h-9 w-9 self-center animate-spin" />
+        }
+        {!lists &&
+          <p>Пока тут нет никаких вишлистов :(</p>
         }
     </main>
   );
