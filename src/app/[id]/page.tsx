@@ -29,10 +29,12 @@ export default async function ListPage({params}:{params: {id: string}}) {
       </div>
       
       <div className="mt-6  " >
-        {
+        {giftArr.length > 0 ?
           giftArr.map(gift => 
             <GiftCard gift={gift} key={gift.id} />
           )
+          :
+          <p>Здесь пока нет еще нет подарков...</p>
         }
       </div>
     </div>
