@@ -30,14 +30,15 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
     const onSumit = (data:z.infer<typeof CreateGiftFormSchema>) => {
         console.log(data, params?.id)
         setIsLoading(true)
-        createNewGift({...data, photo:undefined}, params?.id as string).then(() => {
+        createNewGift({...data, photo:undefined}, params?.id as string).then((id) => {
             if(setIsOpenDrawer) setIsOpenDrawer(false)
+            if(data?.photo?.[0]) uploadPhoto(params?.id as string, id ,data.photo[0])
             toast({
                 variant: "default",
                 title: "Ура! Новый подарок",
             })
         })
-        if(data?.photo?.[0]) uploadPhoto(params?.id as string, data.photo[0])
+        
 
     }
 
