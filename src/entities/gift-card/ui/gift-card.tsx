@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export function GiftCard({gift}:{gift:Gift}) {
   return (
-    <Card className="p-3 w-full h-full flex items-center gap-3" >
-        <div className="w-[100px] h-[100px] bg-slate-400 rounded-xl " >
+    <Card className="p-2 w-full h-auto flex items-center gap-2" >
+        <div className="w-[70px] h-[70px] bg-slate-200 rounded-xl flex justify-center items-center " >
             <GiftSVG width={40}  height={40} />
         </div>
         <CardHeader>
