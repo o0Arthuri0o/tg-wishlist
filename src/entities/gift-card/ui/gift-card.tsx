@@ -1,19 +1,32 @@
 "use client"
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared";
+import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, useToast } from "@/shared";
 import { deleteGift } from "@/shared/lib/delete-gift";
 import { Gift } from "@/shared/lib/get-gifts";
-import { Gift as GiftSVG, Pencil, Trash2 } from "lucide-react";
+import { Gift as GiftSVG, Loader2, Pencil, RussianRuble, Trash2 } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 export function GiftCard({gift, listId}:{gift:Gift, listId:string}) {
+    const { toast } = useToast()
+    const [isLoading, setIsLoading] = useState(false)
+    
+    const handleDelete = () => {
+        setIsLoading(true)
+        deleteGift(gift.id, listId).then(() => {
+            toast({
+                variant:'default',
+                title:"Подарок удален"
+            })
+        })
+    }
 
   return (
     <Card className="p-2 w-full h-auto flex items-center gap-2" >
         <div className="min-w-[70px] h-[70px] bg-slate-200 rounded-xl flex justify-center items-center " >
             <GiftSVG width={40}  height={40} />
         </div>
-        <div className="flex flex-col gap-3 justify-between" >
-            <CardHeader>
+        <div className="flex flex-col gap-3 w-full " >
+            <CardHeader className="p-0 " >
                 <CardTitle className="p-0">
                     {gift.name}
                 </CardTitle>
@@ -28,14 +41,19 @@ export function GiftCard({gift, listId}:{gift:Gift, listId:string}) {
                     {gift.link.length > 0 &&
                         <Link href={gift.link} className="p-2 text-blue-400" >В магазин</Link>
                     }
-                    <p className="text-base p-2" >{gift.price}</p>
+                    <p className="text-base p-2" >Цена: {gift.price}&#x20bd;</p>
                 </div>
-                <div className="flex gap-2 items-center justify-between " >
+                <div className="flex gap-2 items-center self-end" >
                     <Button variant={'secondary'} >
                         <Pencil/>
                     </Button>
-                    <Button variant={'destructive'} onClick={() => deleteGift(gift.id, listId)} >
-                        <Trash2/>
+                    <Button variant={'destructive'} onClick={handleDelete} >
+                        {isLoading ?
+                            <Loader2 className="text-white animate-spin" />
+                            :
+                            <Trash2/>
+                        }
+                        
                     </Button>
                 </div>
             </CardContent>
