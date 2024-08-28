@@ -24,11 +24,8 @@ export const createNewGift = async(gift:Gift, id:string) => {
     });
     //console.log('add new list', docRef.id)
     if(gift?.photo?.[0]) {
-        try {
-            uploadPhoto(id, gift.photo[0])
-        } catch(err) {
-            console.log(err)
-        }
+        console.log(gift.photo[0].name)
+        //uploadPhoto(id, gift.photo[0])
     }
     revalidatePath('/[id]', 'page')
    
