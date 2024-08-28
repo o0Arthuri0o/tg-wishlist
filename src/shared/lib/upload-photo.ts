@@ -8,7 +8,7 @@ export const uploadPhoto = async(idGift:string, gift:FormData ) => {
     console.log(file, file.name, 'file check', 'idGift', idGift)
     const imageRef = ref(storage, `${idGift}/${file.name}`);
 
-    uploadBytes(imageRef, file).then((snapshot) => {
+    await uploadBytes(imageRef, file).then((snapshot) => {
         console.log('Uploaded a blob or file!', snapshot);
     }).catch((err) => console.log('error upload', err))
 }
