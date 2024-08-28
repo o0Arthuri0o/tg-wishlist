@@ -14,5 +14,6 @@ const firebaseConfig = {
 
 
 const app = initializeApp(firebaseConfig);
+console.log('bucket', process.env.STORAGE_BUCKET)
 export const storage = getStorage(app);
 export const db = getFirestore(app)
