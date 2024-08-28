@@ -1,6 +1,6 @@
 "use client"
  
-import { Button, createNewGift, createNewList, DrawerClose, DrawerFooter, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input, Textarea } from "@/shared"
+import { Button, createNewGift, createNewList, DrawerClose, DrawerFooter, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input, Textarea, uploadPhoto } from "@/shared"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -30,10 +30,14 @@ export function CreateGiftForm({gift}:{gift?:z.infer<typeof CreateGiftFormSchema
     const onSumit = (data:z.infer<typeof CreateGiftFormSchema>) => {
         console.log(data, params?.id)
         setIsLoading(true)
-        createNewGift({...data, photo:data?.photo?.[0]}, params?.id as string).then(() => {
-          if(setIsOpenDrawer) setIsOpenDrawer(false)
-
+        createNewGift({...data, photo:undefined}, params?.id as string).then(() => {
+            if(setIsOpenDrawer) setIsOpenDrawer(false)
+            toast({
+                variant: "default",
+                title: "Ура! Новый подарок",
+            })
         })
+        if(data?.photo?.[0]) uploadPhoto(params?.id as string, data.photo[0])
 
     }
 
