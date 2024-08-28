@@ -18,6 +18,7 @@ export function GiftCard({gift, listId}:{gift:Gift, listId:string}) {
     useEffect(() => {
         const getUrl = async() => {
             const urlArr = await getPhotoUrlsInFolder(gift.id)
+            console.log(urlArr[0])
             if(urlArr[0]) setUrl(urlArr[0])
         }
 
