@@ -50,7 +50,7 @@ export default function Home() {
 
      
         {lists && lists.length > 0 ?
-          <div className="grid grid-cols-2 gap-6 " >
+          <div className="grid grid-cols-2 gap-3 " >
             {lists.map(list => 
               <ListCardWrapper id={list.id} title={list.title} key={list.id} />
             )}

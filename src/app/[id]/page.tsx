@@ -28,15 +28,17 @@ export default async function ListPage({params}:{params: {id: string}}) {
         </DrawerWrapper>
       </div>
       
-      <div className="mt-6  " >
+      
         {giftArr.length > 0 ?
-          giftArr.map(gift => 
-            <GiftCard gift={gift} key={gift.id} />
-          )
+          <div className="mt-6 grid grid-cols-2 gap-3 " >
+            {giftArr.map(gift => 
+              <GiftCard gift={gift} key={gift.id} />
+            )}
+          </div>
           :
           <p>Здесь пока нет еще нет подарков...</p>
         }
-      </div>
+      
     </div>
     
   )
