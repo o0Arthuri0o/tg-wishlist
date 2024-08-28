@@ -17,7 +17,10 @@ export function GiftCard({gift, listId}:{gift:Gift, listId:string}) {
 
     useEffect(() => {
         getPhotoUrlsInFolder(gift.id).then((urls) => {
-            if(urls[0]) setUrl(urls[0])
+            if(urls[0]) {
+                setUrl(urls[0])
+                console.log(urls[0])
+            }
         })
     }, [])
     
