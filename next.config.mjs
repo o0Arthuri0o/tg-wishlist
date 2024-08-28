@@ -1,7 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images:{
-        remotePatterns:['tg-wishlist.vercel.app']
+        remotePatterns:[
+        
+                {
+                    protocol: 'https',
+                    hostname: 'tg-wishlist.vercel.app',
+                    port: '',
+                    pathname: '/next/**',
+                },
+        ]
+
     }
 };
 
