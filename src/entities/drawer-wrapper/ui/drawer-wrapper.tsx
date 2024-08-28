@@ -24,7 +24,7 @@ export const DrawerWrapper = ({children, form, type}:{children:ReactNode, form:R
                 {children}
             </DrawerTrigger>
             <DrawerContent className="max-h-[80%]" >
-            <div className="overflow-y-auto " >
+            <div className="overflow-y-auto h-full min-h-[90%]" >
                 <DrawerHeader>
                 <DrawerTitle>{type === 'list' ? 'Озадач друзей своим списком!' : 'Добававь подарок'}</DrawerTitle>
                 <DrawerDescription>{type === 'list' ? 'Задайте название для вашего вишлиста' : 'Заполните карточку подарка'}</DrawerDescription>
