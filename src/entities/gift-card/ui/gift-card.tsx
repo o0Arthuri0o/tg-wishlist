@@ -1,9 +1,12 @@
+"use client"
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared";
+import { deleteGift } from "@/shared/lib/delete-gift";
 import { Gift } from "@/shared/lib/get-gifts";
 import { Gift as GiftSVG, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 
-export function GiftCard({gift}:{gift:Gift}) {
+export function GiftCard({gift, listId}:{gift:Gift, listId:string}) {
+
   return (
     <Card className="p-2 w-full h-auto flex items-center gap-2" >
         <div className="min-w-[70px] h-[70px] bg-slate-200 rounded-xl flex justify-center items-center " >
@@ -31,7 +34,7 @@ export function GiftCard({gift}:{gift:Gift}) {
                     <Button variant={'secondary'} >
                         <Pencil/>
                     </Button>
-                    <Button variant={'destructive'} >
+                    <Button variant={'destructive'} onClick={() => deleteGift(gift.id, listId)} >
                         <Trash2/>
                     </Button>
                 </div>

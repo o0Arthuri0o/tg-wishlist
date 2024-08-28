@@ -32,7 +32,7 @@ export default async function ListPage({params}:{params: {id: string}}) {
         {giftArr.length > 0 ?
           <div className="mt-6 grid grid-cols-1 gap-3 " >
             {giftArr.map(gift => 
-              <GiftCard gift={gift} key={gift.id} />
+              <GiftCard listId={id} gift={gift} key={gift.id} />
             )}
           </div>
           :
