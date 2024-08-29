@@ -112,7 +112,7 @@ export function GiftCard({gift, listId, forUser=false}:{gift:Gift, listId:string
             </div>
         }
             
-        {gift.taken &&
+        {gift.taken && forUser &&
             <div className="absolute w-full h-full top-1/2 left-1/2 z-30 translate-x-[50%] translate-y-[50%] bg-slate-300/30" >
                 <p className="text-slate-300 " >Забронировано</p>
             </div>

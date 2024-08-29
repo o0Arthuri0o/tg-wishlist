@@ -26,7 +26,7 @@ export default async function ListUsersPage({params}:{params: {id: string}}) {
     {giftArr.length > 0 ?
         <div className="mt-6 grid grid-cols-1 gap-3 " >
         {giftArr.map(gift => 
-            <GiftCard listId={id} gift={gift} key={gift.id} />
+            <GiftCard forUser={true} listId={id} gift={gift} key={gift.id} />
         )}
         </div>
         :
