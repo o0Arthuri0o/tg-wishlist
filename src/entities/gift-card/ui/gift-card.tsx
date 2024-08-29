@@ -1,4 +1,5 @@
 "use client"
+import { DialogTaken } from "@/entities/dialog-taken/ui/dialog-taken";
 import { DrawerWrapper } from "@/entities/drawer-wrapper";
 import { CreateGiftForm } from "@/features/create-gift";
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, cn, useToast } from "@/shared";
@@ -6,6 +7,8 @@ import { deleteGift } from "@/shared/lib/delete-gift";
 import { Gift } from "@/shared/lib/get-gifts";
 import { getPhotoUrlsInFolder } from "@/shared/lib/get-photo";
 import { updateGift } from "@/shared/lib/update-gift";
+import { DialogTrigger } from "@/shared/ui/dialog";
+import { Dialog } from "@radix-ui/react-dialog";
 import { Gift as GiftSVG, Loader2, Pencil, RussianRuble, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,7 +39,7 @@ export function GiftCard({gift, listId, forUser=false}:{gift:Gift, listId:string
         })
     }
 
-    const handleTake = () => {
+    const handleTake = (gift:Gift, setIsLoading:(value:boolean)=>void) => {
         const formData = new FormData()
         formData.append('name', gift.name)
         formData.append('description', gift.description)
@@ -49,7 +52,7 @@ export function GiftCard({gift, listId, forUser=false}:{gift:Gift, listId:string
         updateGift(listId, gift.id, formData).then(() => {
             toast({
                 variant:'default',
-                title:"Забронировано"
+                title: !gift.taken ? "Забронировано" : "Отменено"
             })
         })
     }
@@ -91,9 +94,11 @@ export function GiftCard({gift, listId, forUser=false}:{gift:Gift, listId:string
         </div>
         {forUser ?
             gift.taken ?
-                <Button variant={'outline'} className="w-full z-50" onClick={handleTake} >Отменить бронь</Button>
+                <DialogTaken handleTake={() => handleTake(gift, setIsLoading)} >
+                    <Button variant={'outline'} className="w-full"  >Забронировано</Button>
+                </DialogTaken>
                 :
-                <Button className="w-full" onClick={handleTake} >Забронировать</Button>
+                <Button className="w-full" onClick={() => handleTake(gift, setIsLoading)} >Забронировать</Button>
             :
             <div className="flex gap-2 items-center self-end" >
                 <DrawerWrapper type="gift" form={<CreateGiftForm gift={gift} />} >
@@ -112,11 +117,6 @@ export function GiftCard({gift, listId, forUser=false}:{gift:Gift, listId:string
             </div>
         }
             
-        {gift.taken && forUser &&
-            <div className="absolute w-full h-full top-1/2 left-1/2 z-30 translate-x-[50%] translate-y-[50%] bg-slate-300/30" >
-                <p className="text-slate-300 " >Забронировано</p>
-            </div>
-        }   
     </Card>
   )
 }

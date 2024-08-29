@@ -13,7 +13,7 @@ export default async function ListPage({params}:{params: {id: string}}) {
   const list = await getList(id)
   const giftArr = await getGifts(id)
   const url = process.env.URL
-  const text = 'Привет, это мой вишлист подарков!'
+  const text = 'Привет, это мой список желаний! Смотрите и дарите:)'
 
   return (
     <div className="p-2 flex flex-col gap-6" >
