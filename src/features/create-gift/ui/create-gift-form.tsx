@@ -11,6 +11,7 @@ import { DrawerIsOpenContext } from "@/entities"
 import { Loader2 } from "lucide-react"
 import { useParams } from "next/navigation"
 import { Gift } from "@/shared/lib/get-gifts"
+import { updateGift } from "@/shared/lib/update-gift"
 
 export function CreateGiftForm({gift}:{gift?:Gift}) {
     const params = useParams()
@@ -38,10 +39,16 @@ export function CreateGiftForm({gift}:{gift?:Gift}) {
         formData.append('link', data.link ? data.link : '')
         if(data.photo?.[0]) formData.append('photo', data.photo[0])
 
-        createNewGift(formData, params?.id as string).then((id) => {
+        if(!gift) createNewGift(formData, params?.id as string).then((id) => {
             if(setIsOpenDrawer) setIsOpenDrawer(false)
             if(data.photo?.[0]) uploadPhoto(id, formData)
         })
+        else if(gift) {
+            updateGift(params?.id as string, gift.id, formData).then(() => {
+                uploadPhoto(gift.id, formData)
+                if(setIsOpenDrawer) setIsOpenDrawer(false)
+            })
+        }
         
 
     }

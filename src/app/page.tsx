@@ -37,7 +37,7 @@ export default function Home() {
   if(id) getLists(`${id}`)
 
   return (
-    <main className="p-6 flex flex-col gap-6 items-center ">
+    <main className="p-2 flex flex-col gap-6 items-center ">
 
       <div className="flex flex-col gap-6 items-center " >
         <p> <span className="font-bold " >{userName}</span>, создавай списки желаний и делись ими с друзьями!</p>
@@ -45,7 +45,7 @@ export default function Home() {
 
 
       <DrawerWrapper type="list" form={<CreateListForm/>} >
-        <Button>Создать новый список</Button>
+        <Button className="w-full " >Создать новый список</Button>
       </DrawerWrapper>
 
      

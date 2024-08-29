@@ -17,9 +17,10 @@ export function GiftCard({gift, listId}:{gift:Gift, listId:string}) {
 
     useEffect(() => {
         getPhotoUrlsInFolder(gift.id).then((urls) => {
-            if(urls[0]) {
-                setUrl(urls[0])
-                console.log(urls[0])
+            if(urls.length > 0) {
+                const url = urls.at(-1)
+               if(url) setUrl(url)
+                console.log(url)
             }
         })
     }, [])
@@ -37,9 +38,9 @@ export function GiftCard({gift, listId}:{gift:Gift, listId:string}) {
   return (
     <Card className="p-2 w-full h-auto flex flex-col gap-2" >
         <div className="flex items-center gap-2 " >
-            <div className="relative min-w-[70px] h-[70px] bg-slate-200 rounded-xl flex justify-center items-center " >
+            <div className="relative min-w-[70px] h-[70px] bg-slate-200 rounded-xl overflow-hidden flex justify-center items-center " >
                 {url.length > 0 ?
-                    <Image src={url} alt='Подарок' fill />
+                    <Image src={url} alt='Подарок' fill style={{objectFit:'cover'}} />
                     :
                     <GiftSVG width={40}  height={40} />
                 }
@@ -56,11 +57,13 @@ export function GiftCard({gift, listId}:{gift:Gift, listId:string}) {
                     }
                 </CardHeader>
                 <CardContent className=" p-0" >
-                    <div className="flex justify-between gap-3 p-0" >
-                        {gift.link.length > 0 &&
-                            <Link href={gift.link} className="p-2 text-blue-400" >В магазин</Link>
+                    <div className="grid grid-cols-2 justify-between gap-2 p-0 " >
+                        {gift.link.length > 0 ?
+                            <Link href={gift.link} className="p-1 text-blue-400" >В магазин</Link>
+                            :
+                            <p></p>
                         }
-                        <p className="text-base p-2" >Цена: {gift.price}&#x20bd;</p>
+                        <p className="text-base p-1" >Цена: {gift.price}&#x20bd;</p>
                     </div>
                 </CardContent>
             </div>

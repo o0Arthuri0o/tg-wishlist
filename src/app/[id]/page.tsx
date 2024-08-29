@@ -14,7 +14,7 @@ export default async function ListPage({params}:{params: {id: string}}) {
   const giftArr = await getGifts(id)
 
   return (
-    <div className="p-6 flex flex-col gap-6" >
+    <div className="p-2 flex flex-col gap-6" >
       <div className="grid grid-cols-[auto_1fr] gap-3 " >
         <Link href={'/'} >
           <ArrowLeft/>
