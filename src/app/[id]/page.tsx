@@ -18,7 +18,7 @@ export default async function ListPage({params}:{params: {id: string}}) {
   return (
     <div className="p-2 flex flex-col gap-6" >
       <div className="grid grid-cols-[auto_1fr] gap-3 " >
-        <Link href={`https://t.me/share/url?url=${encodeURI(url)}&text=${encodeURI(text)}`} >
+        <Link href={`https://t.me/share/url?url=${encodeURI(url as string)}&text=${encodeURI(text)}`} >
           <ArrowLeft/>
         </Link>
         <p className="text-base" >{list?.title} - {list?.author}</p>
