@@ -37,6 +37,7 @@ export function CreateGiftForm({gift}:{gift?:Gift}) {
         formData.append('description', data.description)
         formData.append('price', data.price)
         formData.append('link', data.link ? data.link : '')
+        formData.append('taken', `${gift?.taken}`)
         if(data.photo?.[0]) formData.append('photo', data.photo[0])
 
         if(!gift) createNewGift(formData, params?.id as string).then((id) => {

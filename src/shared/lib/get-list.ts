@@ -1,7 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../api";
 
-interface List {
+export interface List {
     id: string
     title: string
     author: string

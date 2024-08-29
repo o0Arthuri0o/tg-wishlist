@@ -9,6 +9,7 @@ export interface Gift {
     description:string
     link:string
     price:string
+    taken:boolean
 }
 
 export const getGifts = async(idList:string) => {
@@ -17,7 +18,7 @@ export const getGifts = async(idList:string) => {
     const querySnapshot = await getDocs(collection(db, `lists/${idList}/gifts`)) 
     if(querySnapshot.docs.length > 0) {
         querySnapshot.forEach((doc) => {
-            giftsArr.push({id: doc.id, name: doc.data().name, description: doc.data().description, link: doc.data().link, price: doc.data().price});
+            giftsArr.push({id: doc.id, name: doc.data().name, description: doc.data().description, link: doc.data().link, price: doc.data().price, taken:doc.data().taken});
         });
     }  
     return giftsArr

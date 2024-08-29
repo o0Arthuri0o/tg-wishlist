@@ -21,7 +21,8 @@ export const createNewGift = async(gift:FormData, id:string) => {
         name: giftObj.name, 
         description: giftObj.description,
         link: giftObj.link,
-        price: giftObj.price
+        price: giftObj.price,
+        taken:false
     });
     revalidatePath('/[id]', 'page')
    
