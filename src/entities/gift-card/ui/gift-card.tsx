@@ -91,9 +91,9 @@ export function GiftCard({gift, listId, forUser=false}:{gift:Gift, listId:string
         </div>
         {forUser ?
             gift.taken ?
-                <Button variant={'outline'} className="w-full z-50" >Отменить бронь</Button>
+                <Button variant={'outline'} className="w-full z-50" onClick={handleTake} >Отменить бронь</Button>
                 :
-                <Button className="w-full" >Забронировать</Button>
+                <Button className="w-full" onClick={handleTake} >Забронировать</Button>
             :
             <div className="flex gap-2 items-center self-end" >
                 <DrawerWrapper type="gift" form={<CreateGiftForm gift={gift} />} >

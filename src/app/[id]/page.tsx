@@ -13,11 +13,12 @@ export default async function ListPage({params}:{params: {id: string}}) {
   const list = await getList(id)
   const giftArr = await getGifts(id)
   const url = process.env.URL
+  const text = 'Привет, это мой вишлист подарков!'
 
   return (
     <div className="p-2 flex flex-col gap-6" >
       <div className="grid grid-cols-[auto_1fr] gap-3 " >
-        <Link href={`${url}/wishlist/${id}`} >
+        <Link href={`https://t.me/share/url?url=${encodeURI(url)}&text=${encodeURI(text)}`} >
           <ArrowLeft/>
         </Link>
         <p className="text-base" >{list?.title} - {list?.author}</p>
