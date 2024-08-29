@@ -37,7 +37,7 @@ export default async function ListPage({params}:{params: {id: string}}) {
             )}
           </div>
           :
-          <p>Здесь пока нет еще нет подарков...</p>
+          <p>Здесь пока еще нет подарков...</p>
         }
       
     </div>

@@ -40,7 +40,7 @@ export default function Home() {
     <main className="p-2 flex flex-col gap-6 items-center ">
 
       <div className="flex flex-col gap-6 items-center " >
-        <p> <span className="font-bold " >{userName}</span>, создавай списки желаний и делись ими с друзьями!</p>
+        <p> <span className="font-bold " >{userName}</span>, создавай списки желаний и делись с друзьями!</p>
       </div>
 
 
@@ -55,11 +55,10 @@ export default function Home() {
               <ListCardWrapper id={list.id} title={list.title} key={list.id} />
             )}
           </div>
+          : lists ?
+            <Loader2 className="mt-6 h-9 w-9 self-center animate-spin" />
           :
-          <Loader2 className="mt-6 h-9 w-9 self-center animate-spin" />
-        }
-        {!lists &&
-          <p>Пока тут нет никаких вишлистов :(</p>
+            <p>Пока тут нет никаких вишлистов :(</p>
         }
     </main>
   );
