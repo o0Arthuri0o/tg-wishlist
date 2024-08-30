@@ -153,8 +153,8 @@ export function CreateGiftForm({gift}:{gift?:Gift}) {
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                 Загрузка
                             </>
-                            :
-                            'Создать'
+                            : gift ? 'Изменить'
+                            : 'Создать'
                         }
                     </Button>
                     <DrawerClose>

@@ -20,7 +20,7 @@ export const DrawerWrapper = ({children, form, type}:{children:ReactNode, form:R
     
     return(
         <Drawer open={isOpen} onOpenChange={e => setIsOpen(e)} >
-            <DrawerTrigger>
+            <DrawerTrigger className="w-full " >
                 {children}
             </DrawerTrigger>
             <DrawerContent className="max-h-[80%]" >
