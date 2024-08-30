@@ -14,7 +14,7 @@ export const updateGift = async(idList:string, idGift:string, newGift: FormData)
         description: giftObj.description,
         link: giftObj.link,
         price: giftObj.price,
-        taken: giftObj.taken,
+        taken: giftObj.taken === 'false' ? false : true,
     });
     revalidatePath('/[id]', 'page')
     revalidatePath('/wishlist/[id]', 'page')
